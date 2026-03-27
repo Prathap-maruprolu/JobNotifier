@@ -17,6 +17,7 @@ public class JobsController : ControllerBase
     public async Task<IActionResult> GetJobs()
     {
         var jobs = await _db.Job
+            .AsNoTracking()
             .OrderByDescending(j => j.CreatedAt)
             .Take(100)
             .ToListAsync();

@@ -2,7 +2,12 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"),o =>
+{
+    o.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+    o.CommandTimeout(60);
+}));
+
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 builder.Services.AddCors(options =>

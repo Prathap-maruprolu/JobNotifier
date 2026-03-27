@@ -18,6 +18,7 @@ public class CompaniesController : ControllerBase
     {
         var companies = await _db.Company
             .Where(c => c.IsActive)
+            .AsNoTracking()
             .OrderBy(c => c.Name)
             .ToListAsync();
 
