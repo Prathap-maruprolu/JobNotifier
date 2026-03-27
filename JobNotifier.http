@@ -1,0 +1,6 @@
+@JobNotifier_HostAddress = http://localhost:5053
+
+GET {{JobNotifier_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
